@@ -5,7 +5,7 @@ A large part of this is done through the 'dependency injection container', which
 is reified through the 'container.Container' interface, and created by calling the
 'container.New()' func. As in:
 
-	Container := di.New()
+	Container := container.New()
 
 You do 3 things with a 'dependency injection container'.
 
