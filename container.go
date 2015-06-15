@@ -12,7 +12,7 @@ import (
 
 
 var (
-	ErrAlreadyRegistered = errors.New("Already Set")
+	ErrAlreadyRegistered = errors.New("Already Registered")
 )
 
 // Container is an abstration that represents a 'dependency injection container'.
