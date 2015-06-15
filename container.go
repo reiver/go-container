@@ -12,7 +12,7 @@ import (
 
 
 var (
-	ErrServiceAlreadySet   = errors.New("Already Set")
+	ErrAlreadyRegistered = errors.New("Already Set")
 )
 
 // Container is an abstration that represents a 'dependency injection container'.
@@ -65,7 +65,7 @@ func (container *internalContainer) Register(dependencyName string, dependency i
 	logger.Printf("[BEGIN] Register(%q, <dependency> %T)", dependencyName, dependency)
 
 	if _,ok := container.registry[dependencyName]; ok {
-		err := ErrServiceAlreadySet
+		err := ErrAlreadyRegistered
 
 		logger.Printf("[END]   Register(%q, <dependency> %T) with ERROR: %q", dependencyName, dependency, err)
 		return err
