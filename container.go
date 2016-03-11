@@ -11,10 +11,6 @@ import (
 )
 
 
-var (
-	ErrAlreadyRegistered = errors.New("Already Registered")
-)
-
 // Container is an abstration that represents a 'dependency injection container'.
 //
 // Use the New func to get a new (dependenc injection) container.
@@ -65,7 +61,7 @@ func (container *internalContainer) Register(dependencyName string, dependency i
 	logger.Printf("[BEGIN] Register(%q, <dependency> %T)", dependencyName, dependency)
 
 	if _,ok := container.registry[dependencyName]; ok {
-		err := ErrAlreadyRegistered
+		err := newAlreadyRegisteredComplainer(dependencyName)
 
 		logger.Printf("[END]   Register(%q, <dependency> %T) with ERROR: %q", dependencyName, dependency, err)
 		return err
