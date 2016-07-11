@@ -2,7 +2,6 @@ package container
 
 
 import (
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -251,9 +250,7 @@ func (container *internalContainer) injectPtr(thing interface{}) error {
 							}
 						}
 
-						msg := fmt.Sprintf("%T %v", r)
-
-						err = errors.New( msg )
+						err = fmt.Errorf("%T %v", r, r)
 						return
 					}
 
