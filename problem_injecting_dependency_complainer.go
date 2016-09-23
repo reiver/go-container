@@ -3,6 +3,7 @@ package container
 
 import (
 	"fmt"
+	"reflect"
 )
 
 
@@ -15,13 +16,15 @@ type ProblemInjectingDependencyComplainer interface {
 
 type internalProblemInjectingDependencyComplainer struct {
 	dependencyName string
+	reflectedValue reflect.Value
 	err error
 }
 
 
-func newProblemInjectingDependencyComplainer(dependencyName string, err error) error {
+func newProblemInjectingDependencyComplainer(dependencyName string, reflectedValue reflect.Value, err error) error {
 	complainer := internalProblemInjectingDependencyComplainer{
 		dependencyName:dependencyName,
+		reflectedValue:reflectedValue,
 		err:err,
 	}
 
@@ -30,7 +33,7 @@ func newProblemInjectingDependencyComplainer(dependencyName string, err error) e
 
 
 func (complainer *internalProblemInjectingDependencyComplainer) Error() string {
-	return fmt.Sprintf("Problem injecting dependency %q: %v", complainer.dependencyName, complainer.err)
+	return fmt.Sprintf("Problem injecting dependency %q with value %v (%s) (%s): %v", complainer.dependencyName, complainer.reflectedValue, complainer.reflectedValue.Kind().String(), complainer.reflectedValue.String(), complainer.err)
 }
 
 
