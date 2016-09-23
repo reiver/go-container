@@ -262,7 +262,7 @@ func (container *internalContainer) injectPtr(thing interface{}) error {
 			}(x.Field(i), dependencyName)
 
 			if nil != err {
-				return err
+				return newProblemInjectingDependencyComplainer(dependencyName, err)
 			}
 		} else if "" != dependencyName {
 			dependenciesNotFoundComplainer.insert(dependencyName)
